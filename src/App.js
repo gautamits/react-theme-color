@@ -1,24 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, {useState, useEffect} from 'react';
+import ChangeColor from './ChangeColor'
 import './App.css';
 
 function App() {
+  const [change, toggleChange] = useState(false)
+  const [color, changeColor] = useState("#458eff")
+  const [isRandom, toggleRandom] = useState(false)
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <label>change<input type="checkbox" value={change} onChange={e=>toggleChange(!change)}/></label>
+      <input type="color" value={color} onChange={e=>changeColor(e.target.value)}/>
+      <label>random<input type="checkbox" value={isRandom} onChange={e=>toggleRandom(!isRandom)}/></label>
+      {change && <ChangeColor random={isRandom} color={color}>hello</ChangeColor>}
     </div>
   );
 }
